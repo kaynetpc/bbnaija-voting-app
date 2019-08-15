@@ -14,13 +14,15 @@
 
     <title>BBNIJA VOTING</title>
   </head>
-  <body>
+  <body id="top">
     <div class="container">
       <div class="row">
         <div class="col-md-4 col-sm-12 text-center div-center">
 
           <div class="title" style="color: #603f83ff; font-weight: bold; 
-          ">BIG BROTHER NAIJA 2019 </div>
+          "><img id="head-barge" src="img/barge.png">BIG BROTHER NAIJA 2019<img id="head-barge" src="img/barge.png"></div>
+          
+         
 
           <div id="title-div">
             <img src="img/joy.png">
@@ -58,7 +60,25 @@
       </div>
     </div>
 
-    
+    <div id="help-div" class="text-center">
+
+      <p id="help-btn-cont" style="display:none;">Welcome To BBNIJA Voting App<br>
+      To vote: Simply check on your favourite house mate <em>with prefered Ae token</em> to support and click on vote button, <br>
+      right below each contestants
+      <i> Note: Charges Will be taken from your Ae eatenity wallet!<br>
+       Addmit to <em>resposible gambling</em>The App is designed for Fun <br>
+      you Vote increase your favourite chances of staying in the the House </i>
+    </p>
+    <a href="#help-btn-cont">
+     
+      <button id="help-btn" class="btn btn-block btn-sp-help"><img src="img/help1.png">  HELP</button>
+      <button id="help-btn-close" class="btn btn-block btn-sp-help" style="display:none;"> <img src="img/help1.png">  HIDE</button>
+     
+    </a>  
+    </div>
+    <div class="footer-div text-center">
+        <img src="img/api.png">  © 2019 just keep Voting Your favourite <img src="img/elect.png">
+    </div>
 
 
     <script id="template" type="x-tmpl-mustache">
@@ -87,5 +107,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+    <script src="scripts/jquery.bactotop.js"></script>
+    
+    <a id="backtotop" href="#top"><img src="img/top.png"></a>
   </body>
 </html>

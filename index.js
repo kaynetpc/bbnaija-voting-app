@@ -85,7 +85,7 @@ window.addEventListener('load', async () => {
   for (let i = 1; i <= naijasLength; i++) {
 
 
-    const naija = await callStatic('getMeme', [i]);
+    const naija = await callStatic('getNaija', [i]);
 
  
     naijaArray.push({
@@ -129,16 +129,36 @@ $('#registerBtn').click(async function(){
   const name = ($('#regName').val()),
         url = ($('#regUrl').val());
 
-  await contractCall('registerMeme', [url, name], 0);
+  await contractCall('registerNaija', [url, name], 0);
 
 
   naijaArray.push({
     creatorName: name,
-    memeUrl: url,
+    naijaUrl: url,
     index: naijaArray.length+1,
     votes: 0,
   })
 
   renderNaijas();
   $("#loader").hide();
+});
+
+
+
+
+
+
+
+$('#help-btn').click(function(){
+
+  $('#help-btn').hide();
+  $('#help-btn-close').show();
+  $('#help-btn-cont').show();
+});
+
+$('#help-btn-close').click(function(){
+
+  $('#help-btn').show();
+  $('#help-btn-close').hide();
+  $('#help-btn-cont').hide();
 });
