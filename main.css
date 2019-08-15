@@ -1,0 +1,86 @@
+/*
+*
+*
+----------------------------------------------------
+Byte Code
+Deployed, and mined at this address: ct_8fvjsn9aBHzs2GXv9WL7yptdKLZAXzZBFTB4GKB4hRYyHCkWi
+ 
+
+seyi : https://pbs.twimg.com/media/EBpVANxX4AU1KCP?format=jpg&name=360x360
+
+tasha : https://pbs.twimg.com/media/EBpVAOKXoAUM-7o?format=jpg&name=small
+*_____________________________________________________
+
+#df6589ff #3c1053ff
+
+#f2edd7ff #755139ff
+
+#603f83ff #c7d3d4ff
+*/
+body {
+  background-color: #f2edd7ff;
+  padding: 1em;
+
+}
+
+h1, h6{
+  color: #603f83ff;
+}
+.div-center {
+  margin: 0 auto;
+}
+
+#title-div {
+  margin: 1em;
+  color: white;
+}
+/*emoji images and */
+#icon-img {
+  width: 40px;
+}
+
+/* voters image */
+#voteme{
+  width: 99.5%;
+  height: 280px;
+}
+
+#message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+#loader {
+  margin: 1em;
+  color: #603f83ff;
+  display: none;
+}
+#loader img {
+  width: 40px;
+}
+
+.inputForm {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.btn {
+  background-color: #603f83ff;
+  border-color: #f2edd7ff;
+  color: white;
+  margin-top: 1em;
+}
+.btn:hover{
+  background-color: #f2edd7ff;
+  border-color: #603f83ff;
+}
+
+.card {
+  margin-top: 3em;
+  padding-top: 0.5em;
+  background-color: #f5f5f5;
+  border: 0.5em solid #f5f5f5;
+}
