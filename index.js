@@ -16,9 +16,9 @@ contract NaijaVote =
       naijasLength = 0 }
 
   entrypoint getNaija(index : int) : naija =
-    switch(Map.lookup(index, state.naijas))
-      None    => abort("There was no naija with this index registered.")
-      Some(x) => x
+  	switch(Map.lookup(index, state.naijas))
+	    None    => abort("There was no naija with this index registered.")
+	    Some(x) => x
 
   stateful entrypoint registerNaija(url' : string, name' : string) =
     let naija = { creatorAddress = Call.caller, url = url', name = name', voteCount = 0}
@@ -33,9 +33,7 @@ contract NaijaVote =
     Chain.spend(naija.creatorAddress, Call.value)
     let updatedVoteCount = naija.voteCount + Call.value
     let updateNaijas = state.naijas{ [index].voteCount = updatedVoteCount }
-    put(state{ naijas = updateNaijas })
-
-`;
+    put(state{ naijas = updateNaijas })`;
 
 const contractAddress = 'ct_2bWK9GrFQYGjFNKzrAny9NwtTv4t54zMnUY5cruDU9gpDYruKm';
 //Create variable for client so it can be used in different functions
