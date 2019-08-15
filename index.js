@@ -39,15 +39,7 @@ contract NaijaVote =
 const contractAddress ='ct_2bWK9GrFQYGjFNKzrAny9NwtTv4t54zMnUY5cruDU9gpDYruKm';
 
 var naijaArray =[];
-/*
-var naijaArray = [
-    {"creatorName": "Avala","naijaUrl": "https://ocdn.eu/pulscms-transforms/1/9SBk9kpTURBXy8yODk5ODliNTg1ZGYxMzRkY2Q4MjM2ZTczZGE0ODU0Zi5qcGeSlQMAAM0FAM0C0JMFzQMUzQG8gaEwBQ","votes":18, "index":1, "rank":1},
-    {"creatorName": "Ike","naijaUrl": "https://guardian.ng/wp-content/uploads/2019/07/BBNaija-Ike-Photo-BigBrotherNaijaShow.jpg","votes":27, "index":2, "rank":2},
-    {"creatorName": "Mercy","naijaUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0iTbnECvbSMiNnDYY_7IGJ7PctQuuBp2sI5FnSRIcx_NRMIBg","votes":14, "index":3, "rank":3},
-    {"creatorName": "Tasha","naijaUrl": "https://pbs.twimg.com/media/EBpVAOKXoAUM-7o?format=jpg&name=small","votes":12, "index":4, "rank":4},
-    {"creatorName": "Seyi","naijaUrl": "https://pbs.twimg.com/media/EBpVANxX4AU1KCP?format=jpg&name=360x360","votes":24, "index":5, "rank":5}
-  ];
-*/
+
   var naijaLength = 0;
 
 
@@ -59,17 +51,42 @@ function renderNaijas() {
   $('#naijaBody').html(rendered);
 }
 
+async function callStatic(func, args) {
+  const contract = await client.getContractInstance(contractSource, {contractAddress});
+  const calledGet = await contract.call(func, args, {callStatic: true}).catch(e => console.error(e));
+  const decodeGet = await calledGet.decode().catch(e => console.error(e));
+
+  return decodeGet;
+}
+
+async function contractCall(func, args, value) {
+  const contract = await client.getContractInstance(contractSource, {contractAddress});
+  const calledSet = await contract.call(func, args, {amount: value}).catch(e => console.error(e));
+
+  return calledSet;
+}
+
+
+
+
 window.addEventListener('load', async () => {
   $("#loader").show();
 
   client = await Ae.Aepp();
 
-  const contract = await client.getContractInstance(contractSource, {contractAddress});
-  const calledGet = await contract.call('getNaijasLength', [], {callStatic: true}).catch(e => console.error(e));
-  console.log('calledGet', calledGet);
+  naijasLength = await callStatic('getNaijasLength', []);
 
-  const decodedGet = await calledGet.decode().catch(e => console.error(e));
-  console.log('decodedGet', decodedGet);
+  for (let i = 1; i <= naijasLength; i++){
+    const naija = await callStatic ('getNaija', [i]);
+
+    naijaArray.push({
+      creatorName: naija.name,
+      naijaUrl: naija.Url,
+      index: i,
+      votes: naija.voteCount,
+    })
+
+  } 
 
   renderNaijas();
 
@@ -77,16 +94,28 @@ window.addEventListener('load', async () => {
 });
 
 jQuery("#naijaBody").on("click", ".voteBtn", async function(event){
+  $('#loader').show();
+
   const value = $(this).siblings('input').val();
   const dataIndex = event.target.id;
+
+  await contractCall('voteNaija', [dataIndex], value);
+
   const foundIndex = naijaArray.findIndex(naija => naija.index == dataIndex);
   naijaArray[foundIndex].votes += parseInt(value, 10);
+
   renderNaijas();
+
+  $('#loader').hide();
 });
 
 $('#registerBtn').click(async function(){
-  var name = ($('#regName').val()),
+  $('#loader').show();
+
+  const name = ($('#regName').val()),
       url = ($('#regUrl').val());
+
+  await contractCall('registerNaija', [url, name], 0);
 
   naijaArray.push({
     creatorName: name,
@@ -95,6 +124,9 @@ $('#registerBtn').click(async function(){
     votes: 0
   })
   renderNaijas();
+
+  $('#loader').hide();
+
 });
 
 

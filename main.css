@@ -1,22 +1,4 @@
-/*
-*
-*
-----------------------------------------------------
-Byte Code
-Deployed, and mined at this address: ct_8fvjsn9aBHzs2GXv9WL7yptdKLZAXzZBFTB4GKB4hRYyHCkWi
- 
 
-seyi : https://pbs.twimg.com/media/EBpVANxX4AU1KCP?format=jpg&name=360x360
-
-tasha : https://pbs.twimg.com/media/EBpVAOKXoAUM-7o?format=jpg&name=small
-*_____________________________________________________
-
-#df6589ff #3c1053ff
-
-#f2edd7ff #755139ff
-
-#603f83ff #c7d3d4ff
-*/
 body {
   background-color: #f2edd7ff;
 
@@ -24,6 +6,7 @@ body {
 
 h1, h6{
   color: #603f83ff;
+  text-shadow:  1px 1px 10px rgba(15, 236, 45, 0.2);
 }
 .div-center {
   margin: 0 auto;
@@ -68,13 +51,15 @@ h1, h6{
 
 .btn {
   background-color: #603f83ff;
-  border-color: #f2edd7ff;
+  border-color: #603f83ff;
   color: white;
   margin-top: 1em;
 }
 .btn:hover{
   background-color: #f2edd7ff;
   border-color: #603f83ff;
+  color: #603f83ff;
+  font-weight: bold;
 }
 
 .card {
