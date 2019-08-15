@@ -36,20 +36,23 @@ contract NaijaVote =
     put(state{ naijas = updateNaijas })
 
 `;
-const contractAddress ='ct_2bWK9GrFQYGjFNKzrAny9NwtTv4t54zMnUY5cruDU9gpDYruKm';
 
-var naijaArray =[];
-
-  var naijaLength = 0;
+const contractAddress = 'ct_2bWK9GrFQYGjFNKzrAny9NwtTv4t54zMnUY5cruDU9gpDYruKm';
 
 
-function renderNaijas() {
+var client = null;
+var naijaArray = [];
+var naijasLength = 0;
+
+function renderMemes() {
   naijaArray = naijaArray.sort(function(a,b){return b.votes-a.votes})
-  var template = $('#template').html();
+  let template = $('#template').html();
   Mustache.parse(template);
-  var rendered = Mustache.render(template, {naijaArray});
+  let rendered = Mustache.render(template, {naijaArray});
   $('#naijaBody').html(rendered);
 }
+
+
 
 async function callStatic(func, args) {
   const contract = await client.getContractInstance(contractSource, {contractAddress});
@@ -58,6 +61,7 @@ async function callStatic(func, args) {
 
   return decodedGet;
 }
+
 
 async function contractCall(func, args, value) {
   const contract = await client.getContractInstance(contractSource, {contractAddress});
@@ -68,69 +72,74 @@ async function contractCall(func, args, value) {
 
 
 
-
 window.addEventListener('load', async () => {
+
   $("#loader").show();
+
 
   client = await Ae.Aepp();
 
+
   naijasLength = await callStatic('getNaijasLength', []);
 
-  for (let i = 1; i <= naijasLength; i++){
-    const naija = await callStatic ('getNaija', [i]);
 
+  for (let i = 1; i <= naijasLength; i++) {
+
+
+    const naija = await callStatic('getMeme', [i]);
+
+ 
     naijaArray.push({
       creatorName: naija.name,
-      naijaUrl: naija.Url,
+      naijaUrl: naija.url,
       index: i,
       votes: naija.voteCount,
     })
+  }
 
-  } 
+ 
 
   renderNaijas();
+
 
   $("#loader").hide();
 });
 
+
 jQuery("#naijaBody").on("click", ".voteBtn", async function(event){
-  $('#loader').show();
+  $("#loader").show();
 
-  const value = $(this).siblings('input').val();
-  const dataIndex = event.target.id;
+  let value = $(this).siblings('input').val(),
+      index = event.target.id;
 
-  await contractCall('voteNaija', [dataIndex], value);
 
-  const foundIndex = naijaArray.findIndex(naija => naija.index == dataIndex);
+  await contractCall('voteNaija', [index], value);
+
+
+  const foundIndex = naijaArray.findIndex(naija => naija.index == event.target.id);
+
+
   naijaArray[foundIndex].votes += parseInt(value, 10);
 
   renderNaijas();
-
-  $('#loader').hide();
+  $("#loader").hide();
 });
 
 $('#registerBtn').click(async function(){
-  $('#loader').show();
-
+  $("#loader").show();
   const name = ($('#regName').val()),
         url = ($('#regUrl').val());
 
-  await contractCall('registerNaija', [url, name], 0);
+  await contractCall('registerMeme', [url, name], 0);
+
 
   naijaArray.push({
     creatorName: name,
-    naijaUrl: url,
+    memeUrl: url,
     index: naijaArray.length+1,
-    votes: 0
+    votes: 0,
   })
+
   renderNaijas();
-
-  $('#loader').hide();
-
+  $("#loader").hide();
 });
-
-
-
-
-
-
