@@ -38,13 +38,12 @@ contract NaijaVote =
 `;
 
 const contractAddress = 'ct_2bWK9GrFQYGjFNKzrAny9NwtTv4t54zMnUY5cruDU9gpDYruKm';
-
-
+//Create variable for client so it can be used in different functions
 var client = null;
 var naijaArray = [];
 var naijasLength = 0;
 
-function renderMemes() {
+function renderNaijas() {
   naijaArray = naijaArray.sort(function(a,b){return b.votes-a.votes})
   let template = $('#template').html();
   Mustache.parse(template);
