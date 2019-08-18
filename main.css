@@ -40,7 +40,7 @@ h1, h6{
   color: #603f83ff;
   display: none;
 }
-#loader img {
+img {
   width: 40px;
 }
 
@@ -109,16 +109,25 @@ h1, h6{
 
   position: fixed;
   right: 0;
-  top: 58%;
+  top: 52%;
 }
 
 #help-btn-cont {
   color: #603f83ff;
   text-shadow: 2px 2px 8px rgb(190, 176, 204);
 }
+.btn-sp-help img {
+  width: 19px;
+}
+.btn-sp-help:hover{
+  background-color: #f2edd7ff;
+  border-color: #603f83ff;
+  color: #603f83ff;
+  font-weight: bold;
+}
 
 #head-barge {
-  width: 29px;
+  width: 20px;
 }
 
 .footer-div {
