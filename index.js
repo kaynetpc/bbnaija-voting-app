@@ -35,7 +35,7 @@ contract NaijaVote =
     let updateNaijas = state.naijas{ [index].voteCount = updatedVoteCount }
     put(state{ naijas = updateNaijas })`;
 
-const contractAddress = `ct_2GnCun2wUc6xuDJ9Ma95fgyVjA1F6CVRE7HpG16LANfCQFwMvu`
+const contractAddress = 'ct_2GnCun2wUc6xuDJ9Ma95fgyVjA1F6CVRE7HpG16LANfCQFwMvu'     
 //Create variable for client so it can be used in different functions
 var client = null;
 var naijaArray = [];
