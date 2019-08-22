@@ -53,7 +53,7 @@ function renderNaijas() {
 
 async function callStatic(func, args) {
   const contract = await client.getContractInstance(contractSource, {contractAddress});
-  const calledGet = await contract.call(func, args, {callStatic: true}).catch(e => console.error(e));
+  const calledGet = await contract.call(func, args, {callStatic: true}).catch(e) => console.error(e);
   const decodedGet = await calledGet.decode().catch(e) => console.error(e);
 
   return decodedGet;
@@ -62,7 +62,7 @@ async function callStatic(func, args) {
 
 async function contractCall(func, args, value) {
   const contract = await client.getContractInstance(contractSource, {contractAddress});
-  const calledSet = await contract.call(func, args, {amount: value}).catch(e => console.error(e));
+  const calledSet = await contract.call(func, args, {amount: value}).catch(e) => console.error(e);
 
   return calledSet;
 }
