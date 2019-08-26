@@ -1,6 +1,6 @@
 /*
 File: Back to Top JS
-*/
+
 
 jQuery("#backtotop").click(function () {
     jQuery("body,html").animate({
@@ -14,3 +14,4 @@ jQuery(window).scroll(function () {
         jQuery("#backtotop").removeClass("visible");
     }
 });
+*/

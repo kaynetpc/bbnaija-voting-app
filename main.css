@@ -1,7 +1,6 @@
 
 body {
-  background-color: #f2edd7ff;
-
+  background-color: #f2edd7ff;  
 }
 
 h1, h6{
@@ -71,7 +70,7 @@ img {
 .container{
   min-height: 100vh;
   max-height: 100hv;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 /* Back to Top */

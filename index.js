@@ -35,8 +35,8 @@ contract NaijaVote =
     let updateNaijas = state.naijas{ [index].voteCount = updatedVoteCount }
     put(state{ naijas = updateNaijas })`;
 
-const contractAddress = 'ct_2GnCun2wUc6xuDJ9Ma95fgyVjA1F6CVRE7HpG16LANfCQFwMvu'     
-//Create variable for client so it can be used in different functions
+const contractAddress = 'ct_2GnCun2wUc6xuDJ9Ma95fgyVjA1F6CVRE7HpG16LANfCQFwMvu';    
+
 var client = null;
 var naijaArray = [];
 var naijasLength = 0;
@@ -50,19 +50,18 @@ function renderNaijas() {
 }
 
 
-
 async function callStatic(func, args) {
   const contract = await client.getContractInstance(contractSource, {contractAddress});
-  const calledGet = await contract.call(func, args, {callStatic: true}).catch(e) => console.error(e);
-  const decodedGet = await calledGet.decode().catch(e) => console.error(e);
-
+  const calledGet = await contract.call(func, args, {callStatic: true}).catch(e => console.error(e));
+  const decodedGet = await calledGet.decode().catch((e) => console.error(e));
+  
   return decodedGet;
 }
 
 
 async function contractCall(func, args, value) {
   const contract = await client.getContractInstance(contractSource, {contractAddress});
-  const calledSet = await contract.call(func, args, {amount: value}).catch(e) => console.error(e);
+  const calledSet = await contract.call(func, args, {amount: value}).catch(e => console.error(e));
 
   return calledSet;
 }
@@ -106,24 +105,26 @@ window.addEventListener('load', async () => {
 jQuery("#naijaBody").on("click", ".voteBtn", async function(event){
   $("#loader").show();
 
-  let value = $(this).siblings('input').val(),
-      index = event.target.id;
+  const value = $(this).siblings('input').val();
+  const dataIndex = event.target.id;
 
 
-  await contractCall('voteNaija', [index], value);
+  await contractCall('voteNaija', [dataIndex], value);
 
 
-  const foundIndex = naijaArray.findIndex(naija => naija.index == event.target.id);
+  const foundIndex = naijaArray.findIndex(naija => naija.index == dataIndex);
 
 
   naijaArray[foundIndex].votes += parseInt(value, 10);
 
   renderNaijas();
+  
   $("#loader").hide();
 });
 
 $('#registerBtn').click(async function(){
   $("#loader").show();
+
   const name = ($('#regName').val()),
         url = ($('#regUrl').val());
 
@@ -138,6 +139,7 @@ $('#registerBtn').click(async function(){
   })
 
   renderNaijas();
+
   $("#loader").hide();
 });
 
@@ -160,3 +162,19 @@ $('#help-btn-close').click(function(){
   $('#help-btn-close').hide();
   $('#help-btn-cont').hide();
 });
+
+/*
+jQuery("#backtotop").click(function () {
+  jQuery("body,html").animate({
+      scrollTop: 0
+  }, 600);
+});
+jQuery(window).scroll(function () {
+  if (jQuery(window).scrollTop() > 150) {
+      jQuery("#backtotop").addClass("visible");
+  } else {
+      jQuery("#backtotop").removeClass("visible");
+  }
+});
+
+*/
