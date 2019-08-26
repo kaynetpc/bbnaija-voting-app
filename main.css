@@ -69,7 +69,7 @@ img {
 
 .container{
   min-height: 100vh;
-  max-height: 100hv;
+  max-height: 100vh;
   overflow-y: auto;
 }
 
@@ -90,7 +90,7 @@ img {
   width: 19px;
 }
 .btn-sp-help:hover{
-  background-color: #f2edd7ff;
+  background-color: transparent;
   border-color: #603f83ff;
   color: #603f83ff;
   font-weight: bold;
@@ -103,7 +103,7 @@ img {
 .footer-div {
   color: #f2edd7ff;
   background-color: #603f83ff;
-  width: 100%;
+  width: auto;
   height: 40px;
   bottom: 0;
 }
