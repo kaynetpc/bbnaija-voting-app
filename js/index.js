@@ -89,7 +89,7 @@ jQuery("#naijaBody").on("click", ".voteBtn", async function(event){
   const foundIndex = naijaArray.findIndex(naija => naija.index == naijaIndex);
 
 
-  naijaArray[foundIndex].votes += parseInt(aevalue, 10);
+  naijaArray[foundIndex].votes += parseInt(value, 10);
 
   renderNaijas();
   $("#loader").hide();
