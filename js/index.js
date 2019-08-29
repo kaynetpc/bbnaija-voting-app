@@ -61,14 +61,12 @@ window.addEventListener('load', async () => {
 
   for (let i = 1; i <= naijasLength; i++) {
     const naija = (await contractInstance.methods.get_naija(i)).decodedResult;
-    var aettosVote = naija.voteCount;
-    var vote = aettosVote / 1000000000000000000;
 
     naijaArray.push({
       naijaName: naija.name,
       naijaUrl: naija.url,
       index: i,
-      votes: vote,
+      votes: naija.voteCount / 1000000000000000000,
     })
   }
 
