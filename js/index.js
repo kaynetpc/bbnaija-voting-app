@@ -2,7 +2,8 @@ const contractSource = `
 contract NaijaVote =
 
   record naija =
-    { creatorAddress : address,
+    { naijaAddress   : address,
+      creatorAddress : address,
       url            : string,
       name           : string,
       voteCount      : int }
@@ -15,76 +16,52 @@ contract NaijaVote =
     { naijas = {},
       naijasLength = 0 }
 
-  entrypoint getNaija(index : int) : naija =
+  entrypoint get_naija(index : int) : naija =
   	switch(Map.lookup(index, state.naijas))
 	    None    => abort("There was no naija with this index registered.")
 	    Some(x) => x
 
-  stateful entrypoint registerNaija(url' : string, name' : string) =
-    let naija = { creatorAddress = Call.caller, url = url', name = name', voteCount = 0}
-    let index = getNaijasLength() + 1
+  stateful entrypoint register_naija(url' : string, name' : string) =
+    let naija = { naijaAddress = ak_2YzjjyM5XDSpkZaffv6RWcn6iceSPeL79K3knyKH7UhhsvwRnq, creatorAddress = Call.caller, url = url', name = name', voteCount = 0}
+    let index = get_naijas_length() + 1
     put(state{ naijas[index] = naija, naijasLength = index })
 
-  entrypoint getNaijasLength() : int =
+  entrypoint get_naijas_length() : int =
     state.naijasLength
 
-  stateful entrypoint voteNaija(index : int) =
-    let naija = getNaija(index)
-    Chain.spend(naija.creatorAddress, Call.value)
+  stateful entrypoint vote_naija(index : int) =
+    let naija = get_naija(index)
+    Chain.spend(naija.naijaAddress, Call.value)
     let updatedVoteCount = naija.voteCount + Call.value
     let updateNaijas = state.naijas{ [index].voteCount = updatedVoteCount }
     put(state{ naijas = updateNaijas })`;
 
-const contractAddress = 'ct_2GnCun2wUc6xuDJ9Ma95fgyVjA1F6CVRE7HpG16LANfCQFwMvu';    
+const contractAddress = 'ct_gWaavjGUmfEhT6pPUDhFCAceDTDZPHB7WkQR7GbxWrfxD9P7d';    
 
 var client = null;
+var contractInstance = null;
 var naijaArray = [];
 var naijasLength = 0;
 
 function renderNaijas() {
-  naijaArray = naijaArray.sort(function(a,b){return b.votes-a.votes})
+  naijaArray = naijaArray.sort((a, b) => b.votes - a.votes);
   let template = $('#template').html();
   Mustache.parse(template);
   let rendered = Mustache.render(template, {naijaArray});
   $('#naijaBody').html(rendered);
 }
 
-
-async function callStatic(func, args) {
-  const contract = await client.getContractInstance(contractSource, {contractAddress});
-  const calledGet = await contract.call(func, args, {callStatic: true}).catch(e => console.error(e));
-  const decodedGet = await calledGet.decode().catch((e) => console.error(e));
-  
-  return decodedGet;
-}
-
-
-async function contractCall(func, args, value) {
-  const contract = await client.getContractInstance(contractSource, {contractAddress});
-  const calledSet = await contract.call(func, args, {amount: value}).catch(e => console.error(e));
-
-  return calledSet;
-}
-
-
-
 window.addEventListener('load', async () => {
-
   $("#loader").show();
 
-
   client = await Ae.Aepp();
+  contractInstance = await client.getContractInstance(contractSource, {contractAddress});
 
-
-  naijasLength = await callStatic('getNaijasLength', []);
-
+  naijasLength = (await contractInstance.methods.get_naijas_length()).decodedResult;
 
   for (let i = 1; i <= naijasLength; i++) {
+    const naija = (await contractInstance.methods.get_naija(i)).decodedResult;
 
-
-    const naija = await callStatic('getNaija', [i]);
-
- 
     naijaArray.push({
       creatorName: naija.name,
       naijaUrl: naija.url,
@@ -93,11 +70,7 @@ window.addEventListener('load', async () => {
     })
   }
 
- 
-
   renderNaijas();
-
-
   $("#loader").hide();
 });
 
@@ -105,59 +78,29 @@ window.addEventListener('load', async () => {
 jQuery("#naijaBody").on("click", ".voteBtn", async function(event){
   $("#loader").show();
 
-  const value = $(this).siblings('input').val();
-  const dataIndex = event.target.id;
+  let value = $(this).siblings('input').val(),
+      naijaIndex = event.target.id;
 
+  await contractInstance.methods.vote_naija(naijaIndex, { amount: value }).catch(function(error) {
+    alert(error)
+  });
 
-  await contractCall('voteNaija', [dataIndex], value);
-
-
-  const foundIndex = naijaArray.findIndex(naija => naija.index == dataIndex);
+  const foundIndex = naijaArray.findIndex(naija => naija.index == naijaIndex);
 
 
   naijaArray[foundIndex].votes += parseInt(value, 10);
 
   renderNaijas();
-  
   $("#loader").hide();
 });
-
-$('#registerBtn').click(async function(){
-  $("#loader").show();
-
-  const name = ($('#regName').val()),
-        url = ($('#regUrl').val());
-
-  await contractCall('registerNaija', [url, name], 0);
-
-
-  naijaArray.push({
-    creatorName: name,
-    naijaUrl: url,
-    index: naijaArray.length+1,
-    votes: 0,
-  })
-
-  renderNaijas();
-
-  $("#loader").hide();
-});
-
-
-
-
-
-
 
 $('#help-btn').click(function(){
-
   $('#help-btn').hide();
   $('#help-btn-close').show();
   $('#help-btn-cont').show();
 });
 
 $('#help-btn-close').click(function(){
-
   $('#help-btn').show();
   $('#help-btn-close').hide();
   $('#help-btn-cont').hide();
