@@ -66,5 +66,6 @@ $('#registerBtn').click(async function(){
     votes: 0,
   })
 
+  $("#naijaForm")[0].reset();
   $("#loader").hide();
 });
