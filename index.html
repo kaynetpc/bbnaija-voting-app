@@ -39,7 +39,6 @@
           </div>
           <div>
           <div id="naijaBody"></div>
-          <div id="successful-register"><!-- where new reg are link to--></div>
         </div>
       </div>
     </div>
@@ -63,10 +62,11 @@
     <script id="template" type="x-tmpl-mustache">
       {{#naijaArray}}
         <div class="card">
-          <h5 class="card-title">{{creatorName}}</h5>
+          <h5 class="card-title">Big Brother</h5>
           <img class="card-img-top" src="{{naijaUrl}}" alt="Card image cap">
           <div class="card-body">
-            <h6 class="card-subtitle mb-2 text-muted">{{votes}} ættos</h6>
+            <h5>{{niajaName}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{votes}} æ</h6>
             <input type="number" class="form-control" placeholder="Amount" id={{index}}>
             <button class="btn voteBtn btn-block" id={{index}}>VOTE</button>
           </div>
@@ -85,8 +85,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-   <!-- <script src="scripts/jquery.bactotop.js"></script> -->
-    
-    <!-- <a id="backtotop" href="#top"><img src="img/top.png"></a> -->
   </body>
 </html>

@@ -36,7 +36,7 @@ contract NaijaVote =
     let updateNaijas = state.naijas{ [index].voteCount = updatedVoteCount }
     put(state{ naijas = updateNaijas })`;
 
-const contractAddress = 'ct_gWaavjGUmfEhT6pPUDhFCAceDTDZPHB7WkQR7GbxWrfxD9P7d';    
+const contractAddress = 'ct_2UEyMiQiKBKgwWwHtkeqaZkUTJiw1GGVT9kTvLqW2BZsn75ZqC';    
 
 var client = null;
 var contractInstance = null;
@@ -60,7 +60,7 @@ $('#registerBtn').click(async function(){
   await contractInstance.methods.register_naija(url, name);
 
   naijaArray.push({
-    creatorName: name,
+    naijaName: name,
     naijaUrl: url,
     index: naijaArray.length+1,
     votes: 0,

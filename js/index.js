@@ -36,7 +36,7 @@ contract NaijaVote =
     let updateNaijas = state.naijas{ [index].voteCount = updatedVoteCount }
     put(state{ naijas = updateNaijas })`;
 
-const contractAddress = 'ct_gWaavjGUmfEhT6pPUDhFCAceDTDZPHB7WkQR7GbxWrfxD9P7d';    
+const contractAddress = 'ct_2UEyMiQiKBKgwWwHtkeqaZkUTJiw1GGVT9kTvLqW2BZsn75ZqC';    
 
 var client = null;
 var contractInstance = null;
@@ -61,12 +61,14 @@ window.addEventListener('load', async () => {
 
   for (let i = 1; i <= naijasLength; i++) {
     const naija = (await contractInstance.methods.get_naija(i)).decodedResult;
+    var aettosVote = naija.voteCount;
+    var vote = aettosVote / 1000000000000000000;
 
     naijaArray.push({
-      creatorName: naija.name,
+      naijaName: naija.name,
       naijaUrl: naija.url,
       index: i,
-      votes: naija.voteCount,
+      votes: vote,
     })
   }
 
@@ -79,16 +81,17 @@ jQuery("#naijaBody").on("click", ".voteBtn", async function(event){
   $("#loader").show();
 
   let value = $(this).siblings('input').val(),
-      naijaIndex = event.target.id;
+      naijaIndex = event.target.id,
+      aevalue = value * 1000000000000000000;
 
-  await contractInstance.methods.vote_naija(naijaIndex, { amount: value }).catch(function(error) {
+  await contractInstance.methods.vote_naija(naijaIndex, { amount: aevalue }).catch(function(error) {
     alert(error)
   });
 
   const foundIndex = naijaArray.findIndex(naija => naija.index == naijaIndex);
 
 
-  naijaArray[foundIndex].votes += parseInt(value, 10);
+  naijaArray[foundIndex].votes += parseInt(aevalue, 10);
 
   renderNaijas();
   $("#loader").hide();
@@ -105,19 +108,3 @@ $('#help-btn-close').click(function(){
   $('#help-btn-close').hide();
   $('#help-btn-cont').hide();
 });
-
-/*
-jQuery("#backtotop").click(function () {
-  jQuery("body,html").animate({
-      scrollTop: 0
-  }, 600);
-});
-jQuery(window).scroll(function () {
-  if (jQuery(window).scrollTop() > 150) {
-      jQuery("#backtotop").addClass("visible");
-  } else {
-      jQuery("#backtotop").removeClass("visible");
-  }
-});
-
-*/
