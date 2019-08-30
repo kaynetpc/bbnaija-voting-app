@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>BBNaija - Add Naija</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
+  <body id="top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-12 text-center div-center">
+          <div class="title" style="color: #603f83ff; font-weight: bold; 
+          "><img id="head-barge" src="img/barge.png">BIG BROTHER NAIJA 2019<img id="head-barge" src="img/barge.png"></div>
+          <div id="title-div">
+            <img src="img/joy.png">
+            <img src="img/vote.png">
+            <h1>BBNIJA VOTING</h1>
+            <h6><i>Register housemate with zero(0) æ token</i></h6>
+          </div>
+          <div id="message">
+            <div id="loader" class="alert alert-secondary">
+              <img src="img/load2.gif">
+              <div><b>LOADING... <em>please with...</em></b></div>
+            </div>
+          </div>
+          <div>
+            <form id="naijaForm">
+              <div class="form-row">
+                <div class="col">
+                  <input type="text" id="regUrl" class="form-control" placeholder="Naija Image Url" required>
+                </div>
+                <div class="col">
+                  <input type="text" id="regName" class="form-control" placeholder="Naija Name" required>
+                </div>
+              </div>
+            </form>
+            <a href="#successful-register">
+              <button id="registerBtn" class="btn btn-block">Register</button>
+            </a>
+            <div class="container text-center">
+              <a class="btn btn-success btn-sm" href="index.html">Vote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-div text-center">
+        <img src="img/api.png">  © 2019 just keep Voting Your favourite <img src="img/elect.png">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@aeternity/aepp-sdk/dist/aepp-sdk.browser-script.js"></script>
+    <script src="js/add.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  </body>
+</html>

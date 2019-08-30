@@ -4,99 +4,75 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>BBNaija Voting</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="main.css">
-
-    <title>BBNIJA VOTING</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body id="top">
     <div class="container">
       <div class="row">
         <div class="col-md-4 col-sm-12 text-center div-center">
-
           <div class="title" style="color: #603f83ff; font-weight: bold; 
           "><img id="head-barge" src="img/barge.png">BIG BROTHER NAIJA 2019<img id="head-barge" src="img/barge.png"></div>
-          
-         
-
           <div id="title-div">
             <img src="img/joy.png">
             <img src="img/vote.png">
             <h1>BBNIJA VOTING</h1>
-            <h6><i>register or vote your favourite house mate with prefered token amout</i></h6>
+            <h6><i>Vote your favourite housemate with prefered æ token amout</i></h6>
           </div>
-
           <div id="message">
             <div id="loader" class="alert alert-secondary">
               <img src="img/load2.gif">
               <div><b>LOADING... <em>please with...</em></b></div>
             </div>
           </div>
-
           <div>
-            <form>
-              <div class="form-row">
-                <div class="col">
-                  <input type="text" id="regUrl" class="form-control" placeholder="Your BBNIJA Url" required>
-                </div>
-                <div class="col">
-                  <input type="text" id="regName" class="form-control" placeholder="Your name" required>
-                </div>
-              </div>
-            </form>
-            <a href="#successful-register">
-              <button id="registerBtn" class="btn btn-block">Register</button>
-            </a>
-          </div>
-
-          <div id="naijaBody">
-          </div>
-          <div id="successful-register"><!-- where new reg are link to--></div>
-
+          <div id="naijaBody"></div>
         </div>
       </div>
     </div>
-
     <div class="container text-center">
-
-      <p id="help-btn-cont" style="display:none;">Welcome To BBNIJA Voting App<br>
-      To vote: Simply check on your favourite house mate <em>with prefered Ae token</em> to support and click on vote button, <br>
-      right below each contestants
-      <i> Note: Charges Will be taken from your Ae eatenity wallet!<br>
-       Addmit to <em>resposible gambling</em>The App is designed for Fun <br>
-      you Vote increase your favourite chances of staying in the the House </i>
-    </p>
-    <a href="#help-btn-cont">
-     
-      <button id="help-btn" class="btn btn-block btn-sp-help"><img src="img/help1.png"> HELP</button>
-      <button id="help-btn-close" class="btn btn-block btn-sp-help" style="display:none;"><img src="img/help1.png"> HIDE</button>
-     
-    </a>  
+      <p id="help-btn-cont" style="display:none;">Welcome To BBNaIJA Voting æpp<br>
+        To vote: Simply check on your favourite house mate <em>with prefered æ token</em> to support and click on vote button, <br> right below each contestants
+        <i> Note: Charges Will be taken from your æternity wallet!<br>
+        Admit to <em>resposible gambling</em>The App is designed for Fun <br>
+        Your Vote increase your favourite chances of staying in the the House </i>
+      </p>
+      <a class="btn btn-success btn-sm" href="add.html">Add Naija</a>
+      <a href="#help-btn-cont">
+        <button id="help-btn" class="btn btn-block btn-sp-help"><img src="img/help1.png"> HELP</button>
+        <button id="help-btn-close" class="btn btn-block btn-sp-help" style="display:none;"><img src="img/help1.png"> HIDE</button>   
+      </a>  
     </div>
     <div class="footer-div text-center">
         <img src="img/api.png">  © 2019 just keep Voting Your favourite <img src="img/elect.png">
     </div>
 
-
     <script id="template" type="x-tmpl-mustache">
       {{#naijaArray}}
         <div class="card">
-          <h5 class="card-title">{{creatorName}}</h5>
+          <h5 class="card-title">Big Brother</h5>
           <img class="card-img-top" src="{{naijaUrl}}" alt="Card image cap">
           <div class="card-body">
-            <h6 class="card-subtitle mb-2 text-muted">{{votes}} ættos</h6>
+            <h5>{{naijaName}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{votes}} æ</h6>
             <input type="number" class="form-control" placeholder="Amount" id={{index}}>
             <button class="btn voteBtn btn-block" id={{index}}>VOTE</button>
           </div>
         </div>
       {{/naijaArray}}
     </script>
-
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -105,12 +81,9 @@
     <script src="https://unpkg.com/@aeternity/aepp-sdk/dist/aepp-sdk.browser-script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js">
     </script>
-    <script src="index.js"></script>
+    <script src="js/index.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-   <!-- <script src="scripts/jquery.bactotop.js"></script> -->
-    
-    <!-- <a id="backtotop" href="#top"><img src="img/top.png"></a> -->
   </body>
 </html>
